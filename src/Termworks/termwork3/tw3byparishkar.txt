@@ -1,0 +1,112 @@
+import java.util.*;
+
+class myBankAccount {
+    Scanner read = new Scanner(System.in);
+    long accountNumber;
+    String name, address, accType;
+    double balance, deposit, withdraw, interest;
+
+    myBankAccount() {
+        accountNumber = 0;
+        accType = "";
+        address = "";
+        name = "";
+        balance = 0;
+    }
+
+    myBankAccount(long c1accountNumber, String c1accType, String c1address, String c1name, double c1balance){
+        accountNumber = c1accountNumber;
+        accType = c1accType;
+        this.address = c1address;
+        this.name = c1name;
+        balance = c1balance;
+    }
+//    void nameAddTypebalance() {
+//        System.out.println("enter your name");
+//        name = read.next();
+//        System.out.println("enter your address");
+//        address = read.next();
+//        System.out.println("enter your Accoutn type ");
+//        accType = read.next();
+//        System.out.println("enter the initial balance");
+//        balance = read.nextInt();
+//    }
+
+    void comuterInterest() {
+        if (Objects.equals(accType, "sb"))
+            interest = 0.05 * balance;
+        else if (Objects.equals(accType, "rb"))
+            interest = 0.065 * balance;
+        else if (Objects.equals(accType, "fd"))
+            interest = 0.075 * balance;
+    }
+    void showDetails(){
+        System.out.println("Bank Details are as follows");
+        System.out.println("the account name is "+name);
+        System.out.println("the address is "+address);
+        System.out.println("the account type is "+accType);
+        System.out.println("the interst you are getting is "+interest);
+        System.out.println("the balance is "+balance);
+
+    }
+
+    void depositMoney() {
+        System.out.println("enter the money you want to deposit");
+        deposit= read.nextInt();
+        balance = balance + deposit;
+        System.out.println("Your updated balance is:" + balance);
+    }
+
+    void withdrawMoney() {
+        System.out.println("enter the money you want to withdraw");
+        if (balance > withdraw) {
+            withdraw= read.nextInt();
+            balance = balance - withdraw;
+            System.out.println("Your updated balance is:" + balance);
+        } else
+            System.out.println("error 404 insufficient money");
+    }
+}
+
+public class tw3abank {
+    public static void main(String[] args) {
+        Scanner read2 = new Scanner(System.in);
+        myBankAccount c1 = new myBankAccount();
+        long c1accountNumber;
+        String c1name, c1address, c1accType;
+        double c1balance, c1deposit, c1withdraw, c1interest;
+//        c1.nameAddTypebalance();
+        c1.comuterInterest();
+        c1.showDetails();
+        int choice;
+        System.out.println("enter your name");
+        c1name = read2.next();
+        System.out.println("enter account number");
+        c1name = read2.next();
+        System.out.println("enter your address");
+        c1address = read2.next();
+        System.out.println("enter your Accoutn type ");
+        c1accType = read2.next();
+        System.out.println("enter the initial balance");
+        c1balance = read2.nextInt();
+        c1.myBankAccount(c1accountNumber, c1accType, c1address, c1name, c1balance);
+
+        do {
+            System.out.println("enter your choice 1.deposit 2.withdraw 3.balance 4.close \n");
+            choice = read2.nextInt();
+            switch (choice) {
+                case 1 -> {
+                    c1.depositMoney();
+                }
+                case 2 -> {
+                    c1.withdrawMoney();
+                }
+                case 3 -> {
+                    System.out.println("your balance is :");
+                    System.out.println(c1.balance);
+                }
+                default -> System.out.println("Wrong input ");
+            }
+        } while (choice != 4);
+    }
+}
